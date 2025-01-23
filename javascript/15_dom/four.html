@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM FINAL</title>
+</head>
+
+<body style="background-color: #212121; color: #fff;">
+
+    <ul class="language">
+        <li>Javascript</li>
+    </ul>
+
+</body>
+<script>
+
+    // ADDING VALUES
+
+    // (all elements get traversed due to innerHTML)
+    function addLanguage(langName) {
+        const li = document.createElement('li');
+        li.innerHTML = `${langName}`;
+        document.querySelector('.language').appendChild(li);
+    }
+    addLanguage("Python")
+    addLanguage("Ruby");
+
+
+
+    // optimized way (now we don't have to traverse through whole tree)
+    function addOptiLanguage(langName) {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langName));
+        document.querySelector('.language').appendChild(li);
+    }
+
+    addOptiLanguage("Golang");
+
+
+
+    // EDITING VALUES
+    // 1st way
+    const secondLang = document.querySelector('li:nth-child(2)');
+    // secondLang.innerHTML = "Mojo"; 
+
+    // 2nd way
+    const newLi = document.createElement('li');
+    newLi.textContent = "Mojo";
+    secondLang.replaceWith(newLi);
+
+
+    // 3rd way: removing first element with 'Typescript'
+    const firstLang = document.querySelector('li:first-child');
+    firstLang.outerHTML = '<li>Typescript</li>';
+
+
+
+
+    // REMOVING VALUES 
+    // removing last value
+    const lastLang = document.querySelector('li:last-child');
+    lastLang.remove();
+
+</script>
+
+</html>

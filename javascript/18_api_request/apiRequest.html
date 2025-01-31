@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .profile-card {
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+            padding: 16px;
+            margin: 20px auto;
+            color: white
+        }
+
+        .profile-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body style="background-color: #212121;">
+
+    <div class="profile-card">
+        <img id="profile-pic" src="" alt="Profile Picture">
+        <div class="followers-card" id="followers"></div>
+    </div>
+
+
+</body>
+
+<script>
+    const requestUrl = 'https://api.github.com/users/faisalljavid'
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', requestUrl)
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText)
+            // console.log(typeof data);
+            console.log(data.avatar_url);
+            document.getElementById('profile-pic').src = data.avatar_url
+            document.getElementById('followers').innerText = `Followers: ${data.followers}`
+
+        }
+    }
+    xhr.send()
+</script>
+
+</html>
